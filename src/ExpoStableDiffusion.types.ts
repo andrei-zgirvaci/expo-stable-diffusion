@@ -1,7 +1,5 @@
-export type ChangeEventPayload = {
-  value: string;
-};
-
-export type ExpoStableDiffusionViewProps = {
-  name: string;
+export type GenerateImageProps = {
+  prompt: string;
+  stepCount?: number;
+  savePath: string;
 };

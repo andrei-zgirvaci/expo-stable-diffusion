@@ -1,44 +1,52 @@
 import ExpoModulesCore
+import CoreML
 
 public class ExpoStableDiffusionModule: Module {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
-  public func definition() -> ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
-    // The module will be accessible from `requireNativeModule('ExpoStableDiffusion')` in JavaScript.
-    Name("ExpoStableDiffusion")
+    private var pipeline: StableDiffusionPipeline? = nil
+    
+    public func definition() -> ModuleDefinition {
+        Name("ExpoStableDiffusion")
+        
+        AsyncFunction("loadModel", loadModel)
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants([
-      "PI": Double.pi
-    ])
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
+        AsyncFunction("generateImage", generateImage)
     }
-
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { (value: String) in
-      // Send an event to JavaScript.
-      self.sendEvent("onChange", [
-        "value": value
-      ])
+    
+    private func loadModel(modelPath: String) throws {
+        let resourcesAt = URL(fileURLWithPath: modelPath)
+        
+        let config = MLModelConfiguration()
+        config.computeUnits = .cpuAndNeuralEngine
+            
+        let pipeline = try StableDiffusionPipeline(resourcesAt: resourcesAt, controlNet: [], configuration: config, disableSafety: true, reduceMemory: true)
+        
+        self.pipeline = pipeline
+        
+        try pipeline.loadResources()
+        
+        print("Stable Diffusion Model successfully loaded from: \(resourcesAt)")
     }
-
-    // Enables the module to be used as a native view. Definition components that are accepted as part of the
-    // view definition: Prop, Events.
-    View(ExpoStableDiffusionView.self) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { (view: ExpoStableDiffusionView, prop: String) in
-        print(prop)
-      }
+    
+    private func generateImage(prompt: String, stepCount: Int?, savePath: String) throws {
+        var config = StableDiffusionPipeline.Configuration(prompt: prompt)
+        config.schedulerType = .dpmSolverMultistepScheduler
+        config.stepCount = stepCount!
+        
+        print("Generating Images with the following Config:", config)
+        
+        let image = try self.pipeline!.generateImages(configuration: config, progressHandler: { progress in
+            print("Current Step: \(progress.step)")
+            return true
+        }).first
+        
+        let uiImage = UIImage(cgImage: image!!)
+        
+        let imageData = uiImage.jpegData(compressionQuality: 1)
+        
+        let saveImagePath = URL(fileURLWithPath: savePath)
+        
+        try imageData!.write(to: saveImagePath)
+        
+        print("Image Generated at: \(saveImagePath)")
     }
-  }
 }
