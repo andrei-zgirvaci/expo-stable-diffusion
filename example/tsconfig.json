@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-stable-diffusion": ["../src/index"],
+      "expo-stable-diffusion/*": ["../src/*"]
+    }
+  }
+}

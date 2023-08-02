@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android", "web"],
+  "ios": {
+    "modules": ["ExpoStableDiffusionModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.stablediffusion.ExpoStableDiffusionModule"]
+  }
+}
