@@ -1,7 +1,7 @@
 {
   "name": "expo-stable-diffusion",
-  "version": "0.1.0",
-  "description": "My new module",
+  "version": "0.1.1",
+  "description": "Run Stable Diffusion using Core ML on iOS & iPadOS within your Expo & React Native App",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {

@@ -1,10 +1,12 @@
 import React from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
+
 import * as FileSystem from "expo-file-system";
 import * as ExpoStableDiffusion from "expo-stable-diffusion";
 
 const MODEL_PATH = FileSystem.documentDirectory + "Model/stable-diffusion-2-1";
-const SAVE_PATH = FileSystem.documentDirectory + "Generated Images" + "image.jpeg";
+const SAVE_PATH =
+  FileSystem.documentDirectory + "GeneratedImages/image.jpeg";
 
 export default function App() {
   React.useEffect(() => {
@@ -17,6 +19,7 @@ export default function App() {
 
       await ExpoStableDiffusion.generateImage({
         prompt: "a photo of an astronaut riding a horse on mars",
+        stepCount: 25,
         savePath: SAVE_PATH,
       });
 

@@ -5,7 +5,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/andrei-zgirvaci/expo-stable-diffusion)
 ![GitHub stars](https://img.shields.io/github/stars/andrei-zgirvaci/expo-stable-diffusion)
 
-## [Read Full Detailed Guide](https://andreizgirvaci.com/blog/ai-generated-images-in-react-native-with-stable-diffusion)
+## [Read Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
 
 > ❗️ `expo-stable-diffusion` currently only works on iOS due to the platform's ability to run Stable Diffusion models on [Apple Neural Engine](https://github.com/hollance/neural-engine)!
 
@@ -93,3 +93,10 @@ await ExpoStableDiffusion.generateImage({
 
 To use the `expo-stable-diffusion` module, you need a converted Core ML Stable Diffusion model. You can convert your own model using [Apple's official guide](https://github.com/apple/ml-stable-diffusion#-converting-models-to-core-ml) or download pre-converted models from [Apple's Hugging Face repository](https://huggingface.co/apple) or [my Hugging Face repository](https://huggingface.co/andrei-zgirvaci/coreml-stable-diffusion-2-1-split-einsum-v2-txt2img).
 
+## Troubleshooting
+
+> ❗️ The model load time and image generation duration take some time, especially on devices with lower RAM than 6GB! Find more information in **Q6** in the **FAQ** section of the [ml-stable-diffusion](https://github.com/apple/ml-stable-diffusion#-faq) repo.
+
+> [Running Stable Diffusion on Lower-End Devices](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion#running-stable-diffusion-on-lower-end-devices)
+
+> [failed to load ANE model](https://github.com/apple/ml-stable-diffusion/issues/51)
