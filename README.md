@@ -8,7 +8,8 @@
 ## [Read Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
 
 > ❗️ `expo-stable-diffusion` currently only works on iOS due to the platform's ability to run Stable Diffusion models on [Apple Neural Engine](https://github.com/hollance/neural-engine)!
-> ❗️ This package is not included in the `Expo Go`. You will have to use a [`Development Build`](https://docs.expo.dev/develop/development-builds/introduction)
+
+> ❗️ This package is not included in the **Expo Go**. You will have to use a [Development Build](https://docs.expo.dev/develop/development-builds/introduction) or build it locally using Xcode!
 
 ## Introduction
 
@@ -89,6 +90,9 @@ await ExpoStableDiffusion.generateImage({
   savePath: SAVE_PATH,
 });
 ```
+
+> 💡 If you are saving the image in a custom directory, make sure that the direcotry actually exists or you can create it using [`FileSystem.makeDirectoryAsync(fileUri, options)`](https://docs.expo.dev/versions/latest/sdk/filesystem/#filesystemmakedirectoryasyncfileuri-options).
+
 
 ## Obtaining Stable Diffusion Models
 
