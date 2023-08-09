@@ -8,6 +8,7 @@
 ## [Read Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
 
 > ❗️ `expo-stable-diffusion` currently only works on iOS due to the platform's ability to run Stable Diffusion models on [Apple Neural Engine](https://github.com/hollance/neural-engine)!
+> ❗️ This package is not included in the `Expo Go`. You will have to use a [`Development Build`](https://docs.expo.dev/develop/development-builds/introduction)
 
 ## Introduction
 
@@ -78,12 +79,12 @@ import * as FileSystem from 'expo-file-system';
 import * as ExpoStableDiffusion from 'expo-stable-diffusion';
 
 const MODEL_PATH = FileSystem.documentDirectory + 'Model/stable-diffusion-2-1';
-const SAVE_PATH = FileSystem.cacheDirectory + 'GeneratedImages/image.jpeg';
+const SAVE_PATH = FileSystem.documentDirectory + 'image.jpeg';
 
 await ExpoStableDiffusion.loadModel(MODEL_PATH);
 
 await ExpoStableDiffusion.generateImage({
-  prompt: 'A cat coding at night',
+  prompt: 'a cat coding at night',
   stepCount: 25,
   savePath: SAVE_PATH,
 });

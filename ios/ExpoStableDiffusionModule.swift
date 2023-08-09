@@ -12,22 +12,20 @@ public class ExpoStableDiffusionModule: Module {
         AsyncFunction("generateImage", generateImage)
     }
     
-    private func loadModel(modelPath: String) throws {
-        let resourcesAt = URL(fileURLWithPath: modelPath)
-        
+    private func loadModel(modelPath: URL) throws {
         let config = MLModelConfiguration()
         config.computeUnits = .cpuAndNeuralEngine
             
-        let pipeline = try StableDiffusionPipeline(resourcesAt: resourcesAt, controlNet: [], configuration: config, disableSafety: true, reduceMemory: true)
+        let pipeline = try StableDiffusionPipeline(resourcesAt: modelPath, controlNet: [], configuration: config, disableSafety: true, reduceMemory: true)
         
         self.pipeline = pipeline
         
         try pipeline.loadResources()
         
-        print("Stable Diffusion Model successfully loaded from: \(resourcesAt)")
+        print("Stable Diffusion Model successfully loaded from: \(modelPath)")
     }
     
-    private func generateImage(prompt: String, stepCount: Int?, savePath: String) throws {
+    private func generateImage(prompt: String, stepCount: Int?, savePath: URL) throws {
         var config = StableDiffusionPipeline.Configuration(prompt: prompt)
         config.schedulerType = .dpmSolverMultistepScheduler
         config.stepCount = stepCount!
@@ -42,11 +40,9 @@ public class ExpoStableDiffusionModule: Module {
         let uiImage = UIImage(cgImage: image!!)
         
         let imageData = uiImage.jpegData(compressionQuality: 1)
+                
+        try imageData!.write(to: savePath)
         
-        let saveImagePath = URL(fileURLWithPath: savePath)
-        
-        try imageData!.write(to: saveImagePath)
-        
-        print("Image Generated at: \(saveImagePath)")
+        print("Image Generated at: \(savePath)")
     }
 }
