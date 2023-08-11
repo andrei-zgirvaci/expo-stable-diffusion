@@ -16,3 +16,7 @@ export async function generateImage({
     savePath
   );
 }
+
+export function getCurrentStep(): number {
+  return ExpoStableDiffusionModule.getCurrentStep();
+}

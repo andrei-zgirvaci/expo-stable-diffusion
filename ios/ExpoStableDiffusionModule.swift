@@ -3,6 +3,7 @@ import CoreML
 
 public class ExpoStableDiffusionModule: Module {
     private var pipeline: StableDiffusionPipeline? = nil
+    private var currentStep: Int = 0
     
     public func definition() -> ModuleDefinition {
         Name("ExpoStableDiffusion")
@@ -10,6 +11,8 @@ public class ExpoStableDiffusionModule: Module {
         AsyncFunction("loadModel", loadModel)
 
         AsyncFunction("generateImage", generateImage)
+
+        Function("getCurrentStep", getCurrentStep)
     }
     
     private func loadModel(modelPath: URL) throws {
@@ -29,11 +32,13 @@ public class ExpoStableDiffusionModule: Module {
         var config = StableDiffusionPipeline.Configuration(prompt: prompt)
         config.schedulerType = .dpmSolverMultistepScheduler
         config.stepCount = stepCount!
+        self.currentStep = 0
         
         print("Generating Images with the following Config:", config)
         
         let image = try self.pipeline!.generateImages(configuration: config, progressHandler: { progress in
             print("Current Step: \(progress.step)")
+            self.currentStep = progress.step
             return true
         }).first
         
@@ -44,5 +49,9 @@ public class ExpoStableDiffusionModule: Module {
         try imageData!.write(to: savePath)
         
         print("Image Generated at: \(savePath)")
+    }
+
+    private func getCurrentStep() -> Int {
+        return self.currentStep
     }
 }
