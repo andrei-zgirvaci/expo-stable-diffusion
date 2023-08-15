@@ -7,6 +7,8 @@ public class ExpoStableDiffusionModule: Module {
     public func definition() -> ModuleDefinition {
         Name("ExpoStableDiffusion")
         
+        Events("onStepChange")
+        
         AsyncFunction("loadModel", loadModel)
 
         AsyncFunction("generateImage", generateImage)
@@ -33,7 +35,10 @@ public class ExpoStableDiffusionModule: Module {
         print("Generating Images with the following Config:", config)
         
         let image = try self.pipeline!.generateImages(configuration: config, progressHandler: { progress in
+            sendEvent("onStepChange", ["step": progress.step])
+
             print("Current Step: \(progress.step)")
+    
             return true
         }).first
         

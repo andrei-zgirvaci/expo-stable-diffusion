@@ -24,6 +24,12 @@ export default function App() {
 
       Alert.alert(`Image Generated: ${SAVE_PATH}`);
     })();
+
+    const subscription = ExpoStableDiffusion.addStepListener(({ step }) => {
+      console.log(`Current Step: ${step}`);
+    });
+
+    return () => subscription.remove();
   }, []);
 
   return (

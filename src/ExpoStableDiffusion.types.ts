@@ -3,3 +3,7 @@ export type GenerateImageProps = {
   stepCount?: number;
   savePath: string;
 };
+
+export type StepChangeEvent = {
+  step: number;
+};

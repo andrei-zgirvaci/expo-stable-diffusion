@@ -5,7 +5,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/andrei-zgirvaci/expo-stable-diffusion)
 ![GitHub stars](https://img.shields.io/github/stars/andrei-zgirvaci/expo-stable-diffusion)
 
-## [Read Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
+## [Read The Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
 
 > ❗️ `expo-stable-diffusion` currently only works on iOS due to the platform's ability to run Stable Diffusion models on [Apple Neural Engine](https://github.com/hollance/neural-engine)!
 
@@ -76,23 +76,28 @@ npx expo run:ios
 After installation and configuration, you can start generating images using `expo-stable-diffusion`. Here's a basic example:
 
 ```typescript
-import * as FileSystem from 'expo-file-system';
-import * as ExpoStableDiffusion from 'expo-stable-diffusion';
+import * as FileSystem from "expo-file-system";
+import * as ExpoStableDiffusion from "expo-stable-diffusion";
 
-const MODEL_PATH = FileSystem.documentDirectory + 'Model/stable-diffusion-2-1';
-const SAVE_PATH = FileSystem.documentDirectory + 'image.jpeg';
+const MODEL_PATH = FileSystem.documentDirectory + "Model/stable-diffusion-2-1";
+const SAVE_PATH = FileSystem.documentDirectory + "image.jpeg";
 
 await ExpoStableDiffusion.loadModel(MODEL_PATH);
 
+const subscription = ExpoStableDiffusion.addStepListener(({ step }) => {
+  console.log(`Current Step: ${step}`);
+});
+
 await ExpoStableDiffusion.generateImage({
-  prompt: 'a cat coding at night',
+  prompt: "a cat coding at night",
   stepCount: 25,
   savePath: SAVE_PATH,
 });
+
+subscription.remove();
 ```
 
-> 💡 If you are saving the image in a custom directory, make sure that the direcotry actually exists or you can create it using [`FileSystem.makeDirectoryAsync(fileUri, options)`](https://docs.expo.dev/versions/latest/sdk/filesystem/#filesystemmakedirectoryasyncfileuri-options).
-
+> 💡 If you are saving the image in a custom directory, make sure the directory exists. You can create a directory by calling the [`FileSystem.makeDirectoryAsync(fileUri, options)`](https://docs.expo.dev/versions/latest/sdk/filesystem/#filesystemmakedirectoryasyncfileuri-options) function from `expo-file-system`.
 
 ## Obtaining Stable Diffusion Models
 
