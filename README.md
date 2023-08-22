@@ -20,7 +20,7 @@ Well, now you can!
 
 > ❗️ This package is not included in the **Expo Go**. You will have to use a [Development Build](https://docs.expo.dev/develop/development-builds/introduction) or build it locally using Xcode!
 
-## Introduction
+## Getting Started
 
 Start by installing the `expo-stable-diffusion` module into your Expo managed project:
 
