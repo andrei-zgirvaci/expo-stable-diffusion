@@ -4,8 +4,17 @@
 ![npm](https://img.shields.io/npm/v/expo-stable-diffusion)
 ![GitHub issues](https://img.shields.io/github/issues/andrei-zgirvaci/expo-stable-diffusion)
 ![GitHub stars](https://img.shields.io/github/stars/andrei-zgirvaci/expo-stable-diffusion)
+[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://ko-fi.com/andrei_zgirvaci)
 
-## [Read The Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
+**_Have you ever wondered if it's possible to generate images using Stable Diffusion natively on your iPhone or iPad while taking advantage of Core ML in an Expo and React Native app?_**
+
+Well, now you can!
+
+![](https://i.imgur.com/1KaxBff.jpg)
+
+> 💡 [Read The Full Detailed Guide](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion)
+
+## Good to Know
 
 > ❗️ `expo-stable-diffusion` currently only works on iOS due to the platform's ability to run Stable Diffusion models on [Apple Neural Engine](https://github.com/hollance/neural-engine)!
 
@@ -110,3 +119,11 @@ To use the `expo-stable-diffusion` module, you need a converted Core ML Stable D
 > [Running Stable Diffusion on Lower-End Devices](https://andreizgirvaci.com/blog/how-to-create-ai-generated-images-on-ios-in-react-native-using-stable-diffusion#running-stable-diffusion-on-lower-end-devices)
 
 > [failed to load ANE model](https://github.com/apple/ml-stable-diffusion/issues/51)
+
+## Sponsorship 🩷
+
+I dedicate my spare time to the development of this library.
+
+Please consider [supporting this project](https://ko-fi.com/andrei_zgirvaci) if you find `expo-stable-diffusion` helpful or if you are using it in a production-ready app.
+
+In case you need premium guidance on integrating `expo-stable-diffusion` into your own project, bugfixes or any other help, feel free to [contact me](mailto:me@andreizgirvaci.com?subject=Integrating%20expo-stable-diffusion%20in%20my%20app). I will be happy to help!
