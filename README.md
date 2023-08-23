@@ -122,8 +122,8 @@ To use the `expo-stable-diffusion` module, you need a converted Core ML Stable D
 
 ## Sponsorship 🩷
 
-I dedicate my spare time to the development of this library.
+**I am looking for at least $1,000 in sponsorship so that I can go full-time into building this project.**
 
-Please consider [supporting this project](https://ko-fi.com/andrei_zgirvaci) if you find `expo-stable-diffusion` helpful or if you are using it in a production-ready app.
+Currently, I dedicate my spare time to the development of this library. Please consider [supporting this project](https://ko-fi.com/andrei_zgirvaci) if you find `expo-stable-diffusion` helpful or if you are using it in a production-ready app. This will motivate me to work on improving it and adding new features like Android support!
 
 In case you need premium guidance on integrating `expo-stable-diffusion` into your own project, bugfixes or any other help, feel free to [contact me](mailto:me@andreizgirvaci.com?subject=Integrating%20expo-stable-diffusion%20in%20my%20app). I will be happy to help!
