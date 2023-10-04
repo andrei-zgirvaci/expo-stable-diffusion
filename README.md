@@ -4,7 +4,7 @@
 ![npm](https://img.shields.io/npm/v/expo-stable-diffusion)
 ![GitHub issues](https://img.shields.io/github/issues/andrei-zgirvaci/expo-stable-diffusion)
 ![GitHub stars](https://img.shields.io/github/stars/andrei-zgirvaci/expo-stable-diffusion)
-[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://ko-fi.com/andrei_zgirvaci)
+[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/andrei-zgirvaci)
 
 **_Have you ever wondered if it's possible to generate images using Stable Diffusion natively on your iPhone or iPad while taking advantage of Core ML in an Expo and React Native app?_**
 
