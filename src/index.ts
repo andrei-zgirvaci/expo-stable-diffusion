@@ -1,10 +1,10 @@
-import { EventEmitter, Subscription } from "expo-modules-core";
+import { EventEmitter, Subscription } from 'expo-modules-core';
 
-import ExpoStableDiffusionModule from "./ExpoStableDiffusionModule";
 import type {
   GenerateImageProps,
   StepChangeEvent,
-} from "./ExpoStableDiffusion.types";
+} from './ExpoStableDiffusion.types';
+import ExpoStableDiffusionModule from './ExpoStableDiffusionModule';
 
 const emitter = new EventEmitter(ExpoStableDiffusionModule);
 
@@ -20,12 +20,12 @@ export async function generateImage({
   return await ExpoStableDiffusionModule.generateImage(
     prompt,
     stepCount,
-    savePath
+    savePath,
   );
 }
 
 export function addStepListener(
-  listener: (event: StepChangeEvent) => void
+  listener: (event: StepChangeEvent) => void,
 ): Subscription {
-  return emitter.addListener<StepChangeEvent>("onStepChange", listener);
+  return emitter.addListener<StepChangeEvent>('onStepChange', listener);
 }

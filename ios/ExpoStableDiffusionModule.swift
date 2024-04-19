@@ -17,7 +17,7 @@ public class ExpoStableDiffusionModule: Module {
     private func loadModel(modelPath: URL) throws {
         let config = MLModelConfiguration()
         config.computeUnits = .cpuAndNeuralEngine
-            
+        
         let pipeline = try StableDiffusionPipeline(resourcesAt: modelPath, controlNet: [], configuration: config, disableSafety: true, reduceMemory: true)
         
         self.pipeline = pipeline
@@ -38,14 +38,14 @@ public class ExpoStableDiffusionModule: Module {
             sendEvent("onStepChange", ["step": progress.step])
 
             print("Current Step: \(progress.step)")
-    
+            
             return true
         }).first
         
         let uiImage = UIImage(cgImage: image!!)
         
         let imageData = uiImage.jpegData(compressionQuality: 1)
-                
+        
         try imageData!.write(to: savePath)
         
         print("Image Generated at: \(savePath)")

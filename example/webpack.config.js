@@ -9,7 +9,7 @@ module.exports = async (env, argv) => {
         dangerouslyAddModulePathsToTranspile: ['expo-stable-diffusion'],
       },
     },
-    argv
+    argv,
   );
   config.resolve.modules = [
     path.resolve(__dirname, './node_modules'),

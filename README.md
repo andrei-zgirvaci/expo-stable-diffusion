@@ -85,11 +85,11 @@ npx expo run:ios
 After installation and configuration, you can start generating images using `expo-stable-diffusion`. Here's a basic example:
 
 ```typescript
-import * as FileSystem from "expo-file-system";
-import * as ExpoStableDiffusion from "expo-stable-diffusion";
+import * as FileSystem from 'expo-file-system';
+import * as ExpoStableDiffusion from 'expo-stable-diffusion';
 
-const MODEL_PATH = FileSystem.documentDirectory + "Model/stable-diffusion-2-1";
-const SAVE_PATH = FileSystem.documentDirectory + "image.jpeg";
+const MODEL_PATH = FileSystem.documentDirectory + 'Model/stable-diffusion-2-1';
+const SAVE_PATH = FileSystem.documentDirectory + 'image.jpeg';
 
 await ExpoStableDiffusion.loadModel(MODEL_PATH);
 
@@ -98,7 +98,7 @@ const subscription = ExpoStableDiffusion.addStepListener(({ step }) => {
 });
 
 await ExpoStableDiffusion.generateImage({
-  prompt: "a cat coding at night",
+  prompt: 'a cat coding at night',
   stepCount: 25,
   savePath: SAVE_PATH,
 });
