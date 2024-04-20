@@ -8,20 +8,16 @@ import ExpoStableDiffusionModule from './ExpoStableDiffusionModule';
 
 const emitter = new EventEmitter(ExpoStableDiffusionModule);
 
-export async function loadModel(modelPath: string) {
-  return await ExpoStableDiffusionModule.loadModel(modelPath);
+export function loadModel(modelPath: string) {
+  return ExpoStableDiffusionModule.loadModel(modelPath);
 }
 
-export async function generateImage({
+export function generateImage({
   prompt,
   stepCount = 25,
   savePath,
 }: GenerateImageProps) {
-  return await ExpoStableDiffusionModule.generateImage(
-    prompt,
-    stepCount,
-    savePath,
-  );
+  return ExpoStableDiffusionModule.generateImage(prompt, stepCount, savePath);
 }
 
 export function addStepListener(
