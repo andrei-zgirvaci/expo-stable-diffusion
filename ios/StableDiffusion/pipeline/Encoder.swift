@@ -50,7 +50,7 @@ public struct Encoder: ResourceManaging {
         scaleFactor: Float32,
         random: inout RandomSource
     ) throws -> MLShapedArray<Float32> {
-        let imageData = try image.plannerRGBShapedArray(minValue: -1.0, maxValue: 1.0)
+        let imageData = try image.planarRGBShapedArray(minValue: -1.0, maxValue: 1.0)
         guard imageData.shape == inputShape else {
             // TODO: Consider auto resizing and croping similar to how Vision or CoreML auto-generated Swift code can accomplish with `MLFeatureValue`
             throw Error.sampleInputShapeNotCorrect
@@ -63,7 +63,7 @@ public struct Encoder: ResourceManaging {
         }
         let outputName = result.featureNames.first!
         let outputValue = result.featureValue(for: outputName)!.multiArrayValue!
-        let output = MLShapedArray<Float32>(outputValue)
+        let output = MLShapedArray<Float32>(converting: outputValue)
         
         // DiagonalGaussianDistribution
         let mean = output[0][0..<4]
@@ -93,7 +93,7 @@ public struct Encoder: ResourceManaging {
     
     var inputDescription: MLFeatureDescription {
         try! model.perform { model in
-            model.modelDescription.inputDescriptionsByName["z"]!
+            model.modelDescription.inputDescriptionsByName.first!.value
         }
     }
     
