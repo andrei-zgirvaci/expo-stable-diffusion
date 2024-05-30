@@ -10,9 +10,9 @@ public class ExpoStableDiffusionModule: Module {
         Events("onStepChange")
         
         AsyncFunction("loadModel", loadModel)
-
+        
         AsyncFunction("unloadModel", unloadModel)
-
+        
         AsyncFunction("generateImage", generateImage)
     }
     
@@ -21,41 +21,54 @@ public class ExpoStableDiffusionModule: Module {
         config.computeUnits = .cpuAndNeuralEngine
         
         let pipeline = try StableDiffusionPipeline(resourcesAt: modelPath, controlNet: [], configuration: config, disableSafety: true, reduceMemory: true)
-        
+        try pipeline.loadResources()
         self.pipeline = pipeline
-        
-        try self.pipeline!.loadResources()
         
         print("Model successfully loaded from: \(modelPath)")
     }
     
     private func unloadModel() throws {
-        self.pipeline!.unloadResources()
+        self.pipeline?.unloadResources()
         
         print("Model successfully unloaded")
     }
     
     private func generateImage(prompt: String, stepCount: Int?, savePath: URL) throws {
+        guard let pipeline = self.pipeline else {
+            throw NSError(domain: "ExpoStableDiffusionModule", code: 1, userInfo: [NSLocalizedDescriptionKey: "Pipeline not loaded"])
+        }
+        
         var config = StableDiffusionPipeline.Configuration(prompt: prompt)
         config.schedulerType = .dpmSolverMultistepScheduler
         config.stepCount = stepCount!
+        // config.targetSize = 384
+        // config.seed = 10
         
         print("Generating Images with the following Config:", config)
         
-        let image = try self.pipeline!.generateImages(configuration: config, progressHandler: { progress in
+        let images = try pipeline.generateImages(configuration: config, progressHandler: { progress in
             sendEvent("onStepChange", ["step": progress.step])
-
             print("Current Step: \(progress.step)")
-            
             return true
-        }).first
+        })
         
-        let uiImage = UIImage(cgImage: image!!)
+        guard let cgImage = images.first else {
+            print("No images were generated.")
+            return
+        }
         
-        let imageData = uiImage.jpegData(compressionQuality: 1)
+        let uiImage = UIImage(cgImage: cgImage!)
         
-        try imageData!.write(to: savePath)
+        guard let imageData = uiImage.jpegData(compressionQuality: 1.0) else {
+            print("Could not convert UIImage to JPEG data.")
+            return
+        }
         
-        print("Image Generated at: \(savePath)")
+        do {
+            try imageData.write(to: savePath)
+            print("Saved image at \(savePath)")
+        } catch {
+            print("Error saving image at \(savePath): \(error)")
+        }
     }
 }
