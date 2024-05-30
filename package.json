@@ -30,9 +30,9 @@
   "homepage": "https://github.com/andrei-zgirvaci/expo-stable-diffusion#readme",
   "dependencies": {},
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "expo-module-scripts": "^3.4.1",
-    "expo-modules-core": "^1.11.12"
+    "@types/react": "^18.3.2",
+    "expo-module-scripts": "^3.5.1",
+    "expo-modules-core": "^1.12.10"
   },
   "peerDependencies": {
     "expo": "*",
