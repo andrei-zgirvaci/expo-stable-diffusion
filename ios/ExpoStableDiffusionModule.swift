@@ -11,6 +11,8 @@ public class ExpoStableDiffusionModule: Module {
         
         AsyncFunction("loadModel", loadModel)
 
+        AsyncFunction("unloadModel", unloadModel)
+
         AsyncFunction("generateImage", generateImage)
     }
     
@@ -22,9 +24,15 @@ public class ExpoStableDiffusionModule: Module {
         
         self.pipeline = pipeline
         
-        try pipeline.loadResources()
+        try self.pipeline!.loadResources()
         
-        print("Stable Diffusion Model successfully loaded from: \(modelPath)")
+        print("Model successfully loaded from: \(modelPath)")
+    }
+    
+    private func unloadModel() throws {
+        self.pipeline!.unloadResources()
+        
+        print("Model successfully unloaded")
     }
     
     private func generateImage(prompt: String, stepCount: Int?, savePath: URL) throws {

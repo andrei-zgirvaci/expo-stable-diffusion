@@ -12,6 +12,10 @@ export function loadModel(modelPath: string) {
   return ExpoStableDiffusionModule.loadModel(modelPath);
 }
 
+export function unloadModel() {
+  return ExpoStableDiffusionModule.unloadModel();
+}
+
 export function generateImage({
   prompt,
   stepCount = 25,
